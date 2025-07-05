@@ -8,6 +8,7 @@ import { BASE_URL } from "./utils/constants";
 const Login = () => {
     const [emailId, setemailId] = useState("saran123@gmail.com");
     const [password, setpassword] = useState("Clgthhh@123");
+    const [error,seterror]=useState("")
     const dispatch=useDispatch();
     const navigate=useNavigate();
 
@@ -22,8 +23,7 @@ const Login = () => {
             dispatch(adduser(res.data))
             return navigate("/")
         } catch (err) {
-           
-            alert("Login failed. Check console for details.");
+           seterror("ERROR: invalid credentials" )
         }
     };
 
@@ -54,8 +54,9 @@ const Login = () => {
                             onChange={(e) => setpassword(e.target.value)}
                         />
                     </fieldset>
-
+                     <p className="text-red-500">{error}</p>
                     <div className="card-actions justify-center">
+                       
                         <button className="btn btn-primary my-3 py-2" onClick={handleLogin}>
                             Login
                         </button>
